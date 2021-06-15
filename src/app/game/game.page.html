@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button slot="start"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Open Trivia - Game</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <ion-text color="primary">
+      <p class="ion-text-center">Bienvenue {{ pseudo }}</p>
+    </ion-text>
+    <h3 class="ion-text-center" *ngIf="questionCourante" [innerHTML]="questionCourante.question" ></h3>
+    <ion-grid *ngIf="questionCourante.answers.length > 0">
+      <ion-row>
+        <ion-col size-xs="6" size-sm="6" size-md="12" *ngFor="let r of questionCourante.answers">
+          <ion-button expand="full"
+                      (click)="reponse(r)"
+                      color="transparent"
+                      [innerHTML]="r.answer"
+                      [ngClass]="{
+                                    'good': this.questionSuivante && r.correct,
+                                    'bad': this.questionSuivante && !r.correct,
+                                    'unknown': !this.questionSuivante
+                                  }"
+          ></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button *ngIf="questionSuivante && !jeuFini" expand="block" (click)="questionNext()" >Question suivante</ion-button>
+    <ion-button *ngIf="jeuFini" expand="block" (click)="voirScore()" >Voir mon score</ion-button>
+  </div>
+</ion-content>

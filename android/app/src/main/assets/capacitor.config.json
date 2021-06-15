@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Open Trivia",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
